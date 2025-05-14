@@ -1,0 +1,465 @@
+:root {
+  --blur-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.25);
+  --box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+  --backdrop-blur: blur(12px);
+  --border-radius: 16px;
+  --padding: 2rem;
+  --primary-color: #716c91;
+  --secondary-color: #403b65;
+  --text-color: #ffffff;
+  --background-gradient: #2d2b3d;
+  --form-width: 420px;
+}
+
+body {
+  background: var(--background-gradient);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+}
+
+
+.form-container {
+  background: var(--blur-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  width: var(--form-width);
+  max-width: 90%;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+}
+
+.centered-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.large-container {
+  background: var(--blur-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: 75%;
+  max-width: 75%;
+  max-height: 70%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.wide-container {
+  background: var(--blur-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: 50%;
+  max-width: 75%;
+  max-height: 40%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.scale-container {
+  background: var(--blur-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  width: 60%;
+  max-width: 600px;
+  max-height: 50%;
+  text-align: center;
+  margin: 0 auto 2rem auto;
+}
+
+.small-container {
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  width: 45%;
+  max-width: 300px;
+  max-height: 40%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.form-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Fields */
+input,
+select,
+button {
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+button {
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-weight: bold;
+  cursor: default;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Radio Button Styles */
+.horizontal-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.horizontal-scale {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.horizontal-scale label {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 50px;
+}
+
+.horizontal-scale input[type="radio"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+}
+.horizontal-scale {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.horizontal-scale {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.horizontal-scale label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 35px;
+  min-width: 35px;
+}
+
+.horizontal-scale input[type="radio"] {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  cursor: default;
+}
+
+.horizontal-scale input[type="radio"]:checked {
+  background-color: var(--primary-color);
+  border: 3px solid white;
+}
+
+.horizontal-scale input[type="radio"]::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  display: none;
+}
+
+.horizontal-scale input[type="radio"]:checked::after {
+  display: block;
+}
+
+.form-container {
+  background: var(--blur-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  width: var(--form-width);
+  max-width: 90%;
+  color: var(--text-color);
+  transition: transform 0.2s ease-in-out;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+/* Question styling */
+.question-section {
+  margin-bottom: 2rem;
+}
+
+.question-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.combinedbutton {
+  width: 30px;
+  height: 30px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 3px solid #716c91;
+  border-radius: 4px;
+  cursor: default;
+  position: relative;
+  margin-right: 10px;
+}
+
+.combinedbutton:checked {
+  background-color: #716c91;
+  border-color: white;
+}
+
+.combinedbutton:checked::after {
+  content: '✓';
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.radio-group {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.radio-group:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.radio-option {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.radio-input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  z-index: 2;
+}
+
+.radio-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.radio-input:checked + .radio-circle {
+  border-color: white;
+  background-color: var(--primary-color);
+}
+
+.radio-input:checked + .radio-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  display: block;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--primary-color);
+  border: 2px solid white;
+}
+input[type="radio"]::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+input[type="radio"]:checked::after {
+  display: block;
+}
+.radio-label {
+  font-size: 1rem;
+  cursor: default;
+}
+
+.self-description-input {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--border-color);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  padding: 0.9rem;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  margin-top: 1rem;
+}
+
+.self-description-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.9rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  cursor: default;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 2rem;
+}
+
+.submit-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+}
+
+.checkmark {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --form-width: 90%;
+  }
+  
+}
