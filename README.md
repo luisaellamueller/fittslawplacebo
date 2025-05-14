@@ -1,181 +1,178 @@
 # ai-hci-research
 
+## Projektstruktur
+
+```
+AI-HCI-RESEARCH
+├── backend
+│   ├── config
+│   │   └── db.js
+│   ├── controllers
+│   │   ├── fittsTaskController.js
+│   │   ├── postQuestionnaireController.js
+│   │   ├── preQuestionnaireController.js
+│   │   └── probandsController.js
+│   ├── models
+│   │   ├── preQuestionnaireModel.js
+│   │   └── probandModel.js
+│   ├── node_modules
+│   ├── routes
+│   │   ├── fittsTask.js
+│   │   ├── PostQuestionnaireResult.js
+│   │   ├── PreQuestionnaireResult.js
+│   │   ├── probands.js
+│   │   ├── randomize.js
+│   │   ├── storeroute.js
+│   │   └── index.js
+│   └── package-lock.json
+```
+
 ## Randomization:
 
 Es gibt 6 Möglichkeiten für die Reihenfolge:
 
-orderId	Reihenfolge
-Jedesmal:
-pre questionnaire für entsprechendes experiment, 
-experiment 
-post questionnaire 
-1	["Standard", "ML", "Physiologisch"]
-2	["Standard", "Physiologisch", "ML"]
-3	["ML", "Standard", "Physiologisch"]
-4	["ML", "Physiologisch", "Standard"]
-5	["Physiologisch", "Standard", "ML"]
-6	["Physiologisch", "ML", "Standard"]
+| orderId | Reihenfolge |
+|---------|-------------|
+| 1 | ["Standard", "ML", "Physiologisch"] |
+| 2 | ["Standard", "Physiologisch", "ML"] |
+| 3 | ["ML", "Standard", "Physiologisch"] |
+| 4 | ["ML", "Physiologisch", "Standard"] |
+| 5 | ["Physiologisch", "Standard", "ML"] |
+| 6 | ["Physiologisch", "ML", "Standard"] |
 
+Jedesmal:
+- pre questionnaire für entsprechendes experiment
+- experiment 
+- post questionnaire 
 
 ## Structure
 
-## Schema 
+Here's a detailed schema description for each of the four tables:
 
-TABLE post_questionnaire_results (
-    ->     id INT AUTO_INCREMENT PRIMARY KEY,
-    ->     proband_id INT,
-    ->     maus_typ ENUM('Standard', 'ML', 'Physiologisch'),
-    ->     difficulty VARCHAR(20), -- Schwierigkeitsgrad (1-7)
-    ->     system_use VARCHAR(20), -- System würde ich gerne nutzen
-    ->     system_simple VARCHAR(20),  -- System ist einfach
-    ->     system_easyuse VARCHAR(20), -- System ist benutzerfreundlich
-    ->     tech_support VARCHAR(20), -- Technische Unterstützung nicht nötig
-    ->     functions_integrated VARCHAR(20), -- Funktionen gut integriert
-    ->     system_consistent VARCHAR(20),  -- System ist konsistent
-    ->     quick_learning VARCHAR(20), -- Schnell erlernbar
-    ->     system_intuitive VARCHAR(20), -- System ist intuitiv
-    ->     feel_confident VARCHAR(20), -- Selbstbewusst beim Gebrauch
-    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    ->     FOREIGN KEY (proband_id) REFERENCES probands(id)
-    ->     ON DELETE CASCADE
-    ->     ON UPDATE RESTRICT
-    -> );
+### 1. Table: fitts_experiment_results
 
+This table stores the results of Fitts' Law experiment trials, capturing user interaction data and performance metrics.
 
+| Field          | Type          | Null | Key  | Default | Extra           |
+|----------------|---------------|------|------|---------|-----------------|
+| id             | int           | NO   | PRI  | NULL    | auto_increment  |
+| UserID         | int           | NO   |      | NULL    |                 |
+| MausTyp        | varchar(255)  | NO   |      | NULL    |                 |
+| TargetID       | int           | NO   |      | NULL    |                 |
+| DifficultyIndex| float         | NO   |      | NULL    |                 |
+| MT             | float         | NO   |      | NULL    |                 |
+| ClickX         | float         | NO   |      | NULL    |                 |
+| ClickY         | float         | NO   |      | NULL    |                 |
+| TargetX        | float         | YES  |      | NULL    |                 |
+| Width          | int           | NO   |      | NULL    |                 |
+| Distance       | int           | NO   |      | NULL    |                 |
+| Error          | int           | NO   |      | NULL    |                 |
+| Level          | varchar(255)  | NO   |      | NULL    |                 |
+| created_at     | timestamp     | YES  |      | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
 
-AI-HCI-RESEARCH
-├── backend
-│   ├── src
-│   │   ├── config
-│   │   │   └── db.js         # Datenbankkonfiguration
-│   │   ├── controllers
-│   │   │   └── probands.js   # Probanden-Logik
-│   │   ├── routes
-│   │   │   └── probands.js   # Probanden-Routen
-│   │   ├── middleware
-│   │   │   └── cors.js       # Middleware für CORS
-│   │   └── app.js            # Haupt-Express-App
-│   ├── .env                  # Environment-Variablen
-│   ├── package.json
-│   ├── package-lock.json
-│   └── index.js              # Serverstartpunkt
+### 2. Table: post_questionnaire_results
 
+This table stores responses to a post-experiment questionnaire evaluating user experience with the input device.
+
+| Field                | Type       | Null | Key | Default | Extra           |
+|----------------------|------------|------|-----|---------|-----------------|
+| id                   | int        | NO   | PRI | NULL    | auto_increment  |
+| proband_id           | int        | NO   | MUL | NULL    |                 |
+| maus_typ             | varchar(50)| NO   |     | NULL    |                 |
+| frequent_use         | int        | NO   |     | NULL    |                 |
+| complexity           | int        | NO   |     | NULL    |                 |
+| easy_to_use          | int        | NO   |     | NULL    |                 |
+| tech_support         | int        | NO   |     | NULL    |                 |
+| functions_integrated | int        | NO   |     | NULL    |                 |
+| everything_fits      | int        | NO   |     | NULL    |                 |
+| quick_learning       | int        | NO   |     | NULL    |                 |
+| intuitive            | int        | NO   |     | NULL    |                 |
+| felt_secure          | int        | NO   |     | NULL    |                 |
+| little_learning      | int        | NO   |     | NULL    |                 |
+| created_at           | datetime   | NO   |     | NULL    |                 |
+
+### 3. Table: pre_questionnaire_results
+
+This table stores responses to a pre-experiment questionnaire about participant expectations and preferences.
+
+| Field                | Type                           | Null | Key | Default            | Extra            |
+|----------------------|--------------------------------|------|-----|--------------------|-----------------| 
+| id                   | int                            | NO   | PRI | NULL               | auto_increment   |
+| proband_id           | int                            | YES  | MUL | NULL               |                  |
+| maus_typ             | enum('Standard','ML','Physiologisch') | NO |  | NULL               |                  |
+| erwartete_performance| int                            | NO   |     | NULL               |                  |
+| created_at           | timestamp                      | YES  |     | CURRENT_TIMESTAMP  | DEFAULT_GENERATED|
+
+### 4. Table: probands
+
+This table stores information about study participants (test subjects).
+
+| Field                 | Type                          | Null | Key | Default           | Extra             |
+|-----------------------|-------------------------------|------|-----|-------------------|-------------------|
+| id                    | int                           | NO   | PRI | NULL              | auto_increment    |
+| vorname               | varchar(255)                  | NO   |     | NULL              |                   |
+| nachname              | varchar(255)                  | NO   |     | NULL              |                   |
+| geburtsdatum          | date                          | NO   |     | NULL              |                   |
+| technischer_studiengang| tinyint(1)                   | NO   |     | NULL              |                   |
+| stufe                 | enum('Bachelor','Master','PhD')| YES |     | NULL              |                   |
+| created_at            | timestamp                     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| gender                | varchar(50)                   | YES  |     | NULL              |                   |
+| self_described_gender | varchar(255)                  | YES  |     | NULL              |                   |
+| use_data              | tinyint(1)                    | YES  |     | NULL              |                   |
+| data_quality_reason   | text                          | YES  |     | NULL              |                   |
+
+### Database Relationships
+
+Based on the schema:
+
+1. The `probands` table serves as the main participant table
+2. `proband_id` in `pre_questionnaire_results` and `post_questionnaire_results` references `id` in `probands`
+3. `UserID` in `fitts_experiment_results` likely references `id` in `probands`
 
 ## Getting started
 
-In the backend forlder:
+Set up the SQL DB according to the above schema. 
 
-run
+In the backend folder:
 
+Run:
+
+```
 npm install express
 npm install file-saver
+```
+In the frontend/proband frontend dir, run:
 
-In the frontend/proband frontend dir, run 
-
+```
 npm install vite --save-dev
+```
 
-Start the backend server: 
 
+Start the backend server.
 In the /backend directory run:
+
+```
 node index.js
+```
 
 Start the frontend:
-
 Start the mysql server:
-then, run: 
+
+```
 sudo /usr/local/mysql/support-files/mysql.server start
+```
 
-login to it:
+
+Login to it:
+
+```
 mysql -u root -p
-
-Enter password: 
-
-
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/luisaella/ai-hci-research.git
-git branch -M main
-git push -uf origin main
 ```
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/luisaella/ai-hci-research/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Enter a password. 
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Luisa Müller, developer
 
 ## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This belongs to a bachelor thesis submitted in May 2025. 
